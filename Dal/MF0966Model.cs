@@ -1,15 +1,17 @@
+using Entidades;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Linq;
 
-namespace Entidades
+namespace Dal
 {
     public partial class MF0966Model : DbContext
     {
         public MF0966Model()
             : base("name=MF0966ModelCadenaConexion")
         {
+            Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
 
         public virtual DbSet<Categoria> Categorias { get; set; }
