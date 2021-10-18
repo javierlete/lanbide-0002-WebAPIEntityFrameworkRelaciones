@@ -12,6 +12,8 @@ namespace Dal
             : base("name=MF0966ModelCadenaConexion")
         {
             Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            // Configuration.ProxyCreationEnabled = false;
+            // Configuration.LazyLoadingEnabled = false;
         }
 
         public virtual DbSet<Categoria> Categorias { get; set; }

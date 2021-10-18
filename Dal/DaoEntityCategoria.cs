@@ -19,7 +19,7 @@ namespace Dal
         {
             using(MF0966Model db = new MF0966Model())
             {
-                db.Categorias.Remove(ObtenerPorId(id));
+                db.Categorias.Remove(db.Categorias.Find(id));
                 db.SaveChanges();
             }
         }
@@ -50,7 +50,7 @@ namespace Dal
         {
             using (MF0966Model db = new MF0966Model())
             {
-                return db.Categorias.Find(id);
+                return db.Categorias.Include("Productos").FirstOrDefault(c => c.Id == id);
             }
         }
 

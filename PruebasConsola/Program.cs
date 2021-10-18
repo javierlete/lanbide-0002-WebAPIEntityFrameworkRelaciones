@@ -10,7 +10,56 @@ namespace PruebasConsola
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
+        {
+            IDao<Categoria> dao = DaoEntityCategoria.ObtenerInstancia();
+            IDao<Producto> daoProducto = DaoEntityProducto.ObtenerInstancia();
+
+            foreach (var c in dao.ObtenerTodos())
+            {
+                // Console.WriteLine(c.Nombre);
+                Console.WriteLine(c);
+                // Console.WriteLine(c.Productos.Count);
+            }
+
+            Categoria categoria = dao.ObtenerPorId(1L);
+
+            Console.WriteLine(categoria);
+
+            foreach (var p in categoria.Productos)
+            {
+                Console.WriteLine(p);
+            }
+
+            categoria = new Categoria()
+            {
+                Nombre = "Nueva por Entity 10",
+            };
+
+            dao.Insertar(categoria);
+
+            Producto p17 = daoProducto.ObtenerPorId(17L);
+            Producto p29 = daoProducto.ObtenerPorId(29L);
+
+            p17.CategoriaId = categoria.Id;
+            p29.CategoriaId = categoria.Id;
+
+            daoProducto.Modificar(p17);
+            daoProducto.Modificar(p29);
+
+            categoria.Nombre = "Modificada 10";
+
+            dao.Modificar(categoria);
+
+            p17.CategoriaId = 1;
+            p29.CategoriaId = 2;
+
+            daoProducto.Modificar(p17);
+            daoProducto.Modificar(p29);
+
+            dao.Eliminar(categoria.Id);
+        }
+        static void MainProductos(string[] args)
         {
             MF0966Model db = new MF0966Model();
 
