@@ -14,6 +14,7 @@ namespace PruebasConsola
         {
             MF0966Model db = new MF0966Model();
 
+            // Contraejemplo de pedir productos sin pedir explícitamente las categorías incluídas
             foreach(var p in db.Productos)
             {
                 Console.Write(p.Nombre);
@@ -48,14 +49,14 @@ namespace PruebasConsola
 
             Console.WriteLine(dao.ObtenerPorId(p1.Id));
 
-            //Producto p2 = new Producto()
-            //{
-            //    Nombre = "Nuevo Por Dao",
-            //    Precio = 123.45m,
-            //    Categoria = daoCategoria.ObtenerPorId(1L)
-            //};
+            Producto p2 = new Producto()
+            {
+                Nombre = "Nuevo Por Dao",
+                Precio = 123.45m,
+                Categoria = daoCategoria.ObtenerPorId(1L)
+            };
 
-            //dao.Insertar(p2);
+            dao.Insertar(p2);
 
             p1.Precio = 54321.12m;
 
@@ -63,7 +64,7 @@ namespace PruebasConsola
 
             Console.WriteLine(dao.ObtenerPorId(p1.Id));
 
-            //dao.Eliminar(p2.Id);
+            dao.Eliminar(p2.Id);
             dao.Eliminar(p1.Id);
 
             Console.WriteLine(dao.ObtenerPorId(p1.Id));

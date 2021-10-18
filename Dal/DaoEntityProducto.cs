@@ -28,6 +28,11 @@ namespace Dal
         {
             using (MF0966Model db = new MF0966Model())
             {
+                if (producto.Categoria != null)
+                {
+                    producto.CategoriaId = producto.Categoria.Id;
+                    db.Entry(producto.Categoria).State = System.Data.Entity.EntityState.Unchanged;
+                }
                 db.Productos.Add(producto);
                 db.SaveChanges();
 
