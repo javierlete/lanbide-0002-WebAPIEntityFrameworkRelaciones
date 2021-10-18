@@ -35,6 +35,9 @@ namespace Dal
                 }
 
                 db.Productos.Add(producto);
+                
+                db.Entry(producto).Reference(p => p.Categoria).Load();
+
                 db.SaveChanges();
 
                 return producto;
@@ -45,9 +48,9 @@ namespace Dal
         {
             using (MF0966Model db = new MF0966Model())
             {
-                if (producto.CategoriaId != producto.Categoria.Id)
+                if (producto.CategoriaId != producto.Categoria?.Id)
                 {
-                    producto.Categoria = DaoEntityCategoria.ObtenerInstancia().ObtenerPorId(producto.CategoriaId);
+                    producto.Categoria = db.Categorias.Find(producto.CategoriaId);
                 }
                 
                 db.Entry(producto.Categoria).State = System.Data.Entity.EntityState.Unchanged;
