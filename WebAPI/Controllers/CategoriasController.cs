@@ -2,6 +2,7 @@
 using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -26,6 +27,7 @@ namespace WebAPI.Controllers
 
             if(categoria == null)
             {
+                Debug.WriteLine("No se ha encontrado el registro cuyo id es el " + id);
                 return NotFound();
             }
 
