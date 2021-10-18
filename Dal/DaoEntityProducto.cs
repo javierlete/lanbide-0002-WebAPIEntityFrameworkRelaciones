@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dal
 {
-    public class DaoEntityProducto : IDao<Producto>
+    public class DaoEntityProducto : IDaoProducto
     {
         #region Singleton
         private DaoEntityProducto() { }

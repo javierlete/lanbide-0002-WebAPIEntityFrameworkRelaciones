@@ -11,7 +11,7 @@ namespace WebAPI.Controllers
 {
     public class ProductosController : ApiController
     {
-        private static readonly IDao<Producto> dao = DaoEntityProducto.ObtenerInstancia();
+        private static readonly IDaoProducto dao = DaoEntityProducto.ObtenerInstancia();
 
         // GET: api/Productos
         public IEnumerable<Producto> Get()
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
         {
             IEnumerable<Producto> productos;
 
-            productos = ((DaoEntityProducto)dao).ObtenerPorNombreParcial(nombre);
+            productos = dao.ObtenerPorNombreParcial(nombre);
             
             foreach (Producto p in productos)
             {
