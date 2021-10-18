@@ -12,13 +12,13 @@ namespace WebAPI.Controllers
     public class ProductosController : ApiController
     {
         private static readonly IDao<Producto> dao = DaoEntityProducto.ObtenerInstancia();
-        
+
         // GET: api/Productos
         public IEnumerable<Producto> Get()
         {
-            //return dao.ObtenerTodos();
+            IEnumerable<Producto> productos;
 
-            IEnumerable<Producto> productos = dao.ObtenerTodos();
+            productos = dao.ObtenerTodos();
 
             foreach (Producto p in productos)
             {
@@ -26,6 +26,21 @@ namespace WebAPI.Controllers
             }
 
             return productos;
+        }
+
+        public IEnumerable<Producto> Get(string nombre)
+        {
+            IEnumerable<Producto> productos;
+
+            productos = ((DaoEntityProducto)dao).ObtenerPorNombreParcial(nombre);
+            
+            foreach (Producto p in productos)
+            {
+                p.Categoria.Productos = null;
+            }
+
+            return productos;
+            //return new List<Producto>() { new Producto() { Nombre = nombre } };
         }
 
         // GET: api/Productos/5

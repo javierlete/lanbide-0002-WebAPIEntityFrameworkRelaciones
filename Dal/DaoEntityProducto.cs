@@ -44,6 +44,14 @@ namespace Dal
             }
         }
 
+        public IEnumerable<Producto> ObtenerPorNombreParcial(string nombre)
+        {
+            using (MF0966Model db = new MF0966Model())
+            {
+                return db.Productos.Include("Categoria").Where(p => p.Nombre.Contains(nombre)).ToList();
+            }
+        }
+
         public Producto Modificar(Producto producto)
         {
             using (MF0966Model db = new MF0966Model())
