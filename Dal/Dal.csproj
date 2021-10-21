@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DaoEntityCategoria.cs" />
+    <Compile Include="DaoEntityFactura.cs" />
     <Compile Include="DaoEntityProducto.cs" />
     <Compile Include="IDao.cs" />
     <Compile Include="IDaoProducto.cs" />
