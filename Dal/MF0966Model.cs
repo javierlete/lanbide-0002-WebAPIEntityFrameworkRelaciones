@@ -33,6 +33,7 @@ namespace Dal
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Cliente>()
+                //.Ignore(c => c.Facturas);
                 .HasMany(e => e.Facturas)
                 .WithRequired(e => e.Cliente)
                 .WillCascadeOnDelete(false);
@@ -50,7 +51,7 @@ namespace Dal
             modelBuilder.Entity<Factura>()
                 .HasMany(e => e.FacturasProductos)
                 .WithRequired(e => e.Factura)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
 
             modelBuilder.Entity<Producto>()
                 .Property(e => e.Precio)

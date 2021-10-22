@@ -52,9 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DaoEntityCategoria.cs" />
+    <Compile Include="DaoEntityCliente.cs" />
     <Compile Include="DaoEntityFactura.cs" />
     <Compile Include="DaoEntityProducto.cs" />
     <Compile Include="IDao.cs" />
+    <Compile Include="IDaoCliente.cs" />
     <Compile Include="IDaoProducto.cs" />
     <Compile Include="MF0966Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

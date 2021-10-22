@@ -7,7 +7,7 @@ namespace Entidades
     using System.Data.Entity.Spatial;
     public partial class FacturasProducto
     {
-        public decimal TotalSinIva => Producto.Precio * Cantidad;
+        public decimal TotalSinIva => Producto != null ? Producto.Precio * Cantidad : 0;
         public decimal Iva => TotalSinIva * Factura.IVA;
         public decimal Total => TotalSinIva + Iva;
     }

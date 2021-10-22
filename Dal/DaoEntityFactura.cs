@@ -30,8 +30,8 @@ namespace Dal
             {
                 db.Facturas.Add(factura);
                 db.SaveChanges();
-
-                return factura;
+                
+                return ObtenerPorId(factura.Id);
             }
         }
 
@@ -42,7 +42,7 @@ namespace Dal
                 db.Entry(factura).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 
-                return factura;
+                return ObtenerPorId(factura.Id);
             }
         }
 
@@ -58,7 +58,7 @@ namespace Dal
         {
             using (MF0966Model db = new MF0966Model())
             {
-                return db.Facturas.Include("Cliente").ToList();
+                return db.Facturas.AsNoTracking().Include("Cliente").ToList();
             }
         }
     }

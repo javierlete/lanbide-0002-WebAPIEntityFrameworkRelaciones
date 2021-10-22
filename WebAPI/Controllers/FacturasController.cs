@@ -15,17 +15,28 @@ namespace WebAPI.Controllers
         // GET: api/Facturas
         public IEnumerable<Factura> Get()
         {
-            List<Factura> facturas = (List<Factura>)dao.ObtenerTodos();
-
-            facturas.ForEach(f => f.Cliente.Facturas = null);
-
-            return facturas;
+            return dao.ObtenerTodos();
         }
 
         // GET: api/Facturas/5
         public Factura Get(long id)
         {
             return dao.ObtenerPorId(id);
+        }
+
+        public Factura Post([FromBody] Factura factura)
+        {
+            return dao.Insertar(factura);
+        }
+
+        public Factura Put(long id, [FromBody] Factura factura)
+        {
+            return dao.Modificar(factura);
+        }
+
+        public void Delete(long id)
+        {
+            dao.Eliminar(id);
         }
     }
 }
