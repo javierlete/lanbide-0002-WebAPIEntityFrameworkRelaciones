@@ -19,24 +19,46 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/Facturas/5
-        public Factura Get(long id)
+        public IHttpActionResult Get(long id)
         {
-            return dao.ObtenerPorId(id);
+            Factura factura = dao.ObtenerPorId(id);
+
+            if (factura != null)
+            {
+                return Ok(factura);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
-        public Factura Post([FromBody] Factura factura)
+        public IHttpActionResult Post([FromBody] Factura factura)
         {
-            return dao.Insertar(factura);
+            Factura f = dao.Insertar(factura);
+            return Created(ControllerContext.Request.RequestUri + "/" + f.Id, f);
         }
 
-        public Factura Put(long id, [FromBody] Factura factura)
+        public IHttpActionResult Put(long id, [FromBody] Factura factura)
         {
-            return dao.Modificar(factura);
+            if (id != factura.Id)
+            {
+                return BadRequest();
+            }
+            return Ok(dao.Modificar(factura));
         }
 
-        public void Delete(long id)
+        public IHttpActionResult Delete(long id)
         {
-            dao.Eliminar(id);
+            try
+            {
+                dao.Eliminar(id);
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
     }
 }

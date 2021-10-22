@@ -19,8 +19,15 @@ namespace Dal
         {
             using(MF0966Model db = new MF0966Model())
             {
-                db.Facturas.Remove(db.Facturas.Find(id));
-                db.SaveChanges();
+                try
+                {
+                    db.Facturas.Remove(db.Facturas.Find(id));
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw new DalException("No existe esa factura " + id, e);
+                }
             }
         }
 
@@ -39,7 +46,13 @@ namespace Dal
         {
             using (MF0966Model db = new MF0966Model())
             {
+                db.FacturasProductos.RemoveRange(db.FacturasProductos.Where(fp => fp.FacturaId == factura.Id));
+                db.SaveChanges();
+
                 db.Entry(factura).State = System.Data.Entity.EntityState.Modified;
+
+                db.FacturasProductos.AddRange(factura.FacturasProductos);
+
                 db.SaveChanges();
 
                 return ObtenerPorId(factura.Id);

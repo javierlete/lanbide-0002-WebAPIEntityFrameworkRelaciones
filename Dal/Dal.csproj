@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DalException.cs" />
     <Compile Include="DaoEntityCategoria.cs" />
     <Compile Include="DaoEntityCliente.cs" />
     <Compile Include="DaoEntityFactura.cs" />
